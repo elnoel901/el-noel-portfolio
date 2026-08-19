@@ -1,0 +1,28 @@
+name: Portfolio Draft Preview
+
+on:
+  push:
+    branches:
+      - portfolio-v2-draft1
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout draft
+        uses: actions/checkout@v4
+      - name: Package rendered site
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-v2-draft1-site
+          path: |
+            index.html
+            preview.html
+          if-no-files-found: error
